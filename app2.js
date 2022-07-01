@@ -2,16 +2,20 @@ const btnAddTask = document.querySelector('.btn-add-task');
 const taskInput = document.querySelector('.input-task');
 const taskRender = document.querySelector('.task-render');
 
-let tasks
+let tasks // массив задач
+// получаю массив, если локальное хранение не пустое иначе
+// получаю пустой массив
 !localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'))
 
 let todoItemEl = [];
 
+// конструктор задачи
 function Task(description) {
   this.description = description;
   this.completed = false;
 }
 
+// шаблон карточки задачи
 const createHtmlTamplate = (task, index) => {
   return `
   <div class="todo-item ${task.completed ? 'checked' : ''}">
@@ -24,6 +28,7 @@ const createHtmlTamplate = (task, index) => {
   `
 }
 
+// наполняю список задач
 const htmlRenderList = () => {
   taskRender.innerHTML = '';
   if (tasks.length > 0) {
@@ -36,10 +41,12 @@ const htmlRenderList = () => {
 htmlRenderList()
 console.log(todoItemEl)
 
+// строка в локальное хранение
 const updateLocalStorage = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+// чекбокс true or false
 const completeTask = (index) => {
   tasks[index].completed = !tasks[index].completed
   if (tasks[index].completed) {
@@ -51,6 +58,7 @@ const completeTask = (index) => {
   htmlRenderList();
 }
 
+// добавляем новую задачу
 btnAddTask.addEventListener('click', () => {
   tasks.push(new Task(taskInput.value));
   updateLocalStorage();
@@ -58,6 +66,11 @@ btnAddTask.addEventListener('click', () => {
   taskInput.value = '';
   console.log('btnAddTask', tasks);
 });
+
+// удаление задачи
+const btnDeleteTask = (index) => {
+
+}
 
 
 

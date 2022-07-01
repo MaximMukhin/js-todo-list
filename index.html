@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Todo List</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__title">Todo List</h1>
+  </header>
+
+  <main class="main">
+    <div class="form-task">
+      <form class="inputs">
+        <label class="sr-only" for="task">Задача</label>
+        <input type="text" class="input-task" id="task" autocomplete="off" placeholder="Новая задача">
+      </form>
+      <button class="btn-add-task">Добавить</button>
+    </div>
+  </main>
+  <section class="section-task">
+    <div class="task-render">
+
+<!--       <div class="todo-item ${task.completed ? 'checked' : ''}">
+        <div class="description">Погулять с собакой</div>
+        <div class="buttons">
+          <input onclick="completedTask(${index})" class="btn-complete" type="checkbox" ${task.completed ? 'checked' : ''}>
+          <button class="btn-delete">Удалить</button>
+        </div>
+      </div> -->
+
+    </div>
+  </section>
+
+  <!--   <script src="app.js"></script> -->
+  <script src="app2.js"></script>
+</body>
+
+</html>

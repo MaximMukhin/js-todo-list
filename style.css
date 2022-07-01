@@ -78,6 +78,10 @@ body {
   margin-top: 10px;
 }
 
+.description {
+min-width: 100px;
+}
+
 .buttons {
   display: flex;
   align-items: center;

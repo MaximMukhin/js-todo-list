@@ -59,8 +59,22 @@ body {
   height: 24px;
   background-color: #e1b074;
   border-radius: 4px;
-  margin-left: 10px;
+  margin-left: 8px;
   margin-right: 16px;
+}
+
+.btn-add-task:hover {
+  background-color: #e4a252;
+}
+.btn-add-task:active {
+  background-color: #ff9009;
+}
+
+.no-task {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .task-render {
@@ -72,10 +86,14 @@ body {
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.736);
   border-radius: 4px;
-  min-height: 40px;
+  min-height: 48px;
   align-items: center;
   padding: 16px 16px;
-  margin-top: 10px;
+  margin-top: 8px;
+}
+
+.todo-item.delete-anim {
+  animation: opacity 1s ease-in-out;
 }
 
 .description {
@@ -103,3 +121,12 @@ body {
   opacity: 0.5;
 }
 
+@keyframes opacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    background-color: crimson;
+  }
+}

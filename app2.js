@@ -1,6 +1,7 @@
 const btnAddTask = document.querySelector('.btn-add-task');
 const taskInput = document.querySelector('.input-task');
 const taskRender = document.querySelector('.task-render');
+const noTask = document.querySelector('.no-task');
 
 let tasks // массив задач
 // получаю массив, если локальное хранение не пустое иначе
@@ -39,15 +40,27 @@ const filterTasks = () => {
   tasks = [...activeTask, ...completedTask]
 }
 
+// проверка есть ли задачи
+const noTaskList = () => {
+  if (tasks.length === 0) {
+    console.log('first')
+    noTask.innerHTML = 'Список задач пуст'
+  } else {
+    noTask.innerHTML = '';
+  }
+}
+noTaskList();
+
 // наполняю список задач
 const htmlRenderList = () => {
   taskRender.innerHTML = '';
   if (tasks.length > 0) {
     filterTasks();
+    noTaskList();
     tasks.forEach((item, index) => {
       taskRender.innerHTML += createHtmlTamplate(item, index);
     });
-    todoItemEl = document.querySelectorAll('.todo-item')
+    todoItemEl = document.querySelectorAll('.todo-item');
   }
 }
 htmlRenderList()
@@ -71,19 +84,29 @@ const completeTask = (index) => {
 
 // добавляем новую задачу
 btnAddTask.addEventListener('click', () => {
-  tasks.push(new Task(taskInput.value));
-  updateLocalStorage();
-  htmlRenderList();
-  taskInput.value = '';
-  console.log('btnAddTask', tasks);
+  if (taskInput.value !== '') {
+    tasks.push(new Task(taskInput.value));
+    updateLocalStorage();
+    htmlRenderList();
+    noTaskList();
+    taskInput.value = '';
+  } else {
+    alert('Введите задачу');
+  }
+
 });
 
 // удаление задачи
 const deleteTask = (index) => {
-  tasks.splice(index, 1)
-  updateLocalStorage();
-  htmlRenderList();
+  todoItemEl[index].classList.add('delete-anim')
+  setTimeout(() => {
+    tasks.splice(index, 1)
+    updateLocalStorage();
+    htmlRenderList();
+    noTaskList();
+  },1000)
 }
+
 
 
 

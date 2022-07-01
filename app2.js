@@ -21,17 +21,29 @@ const createHtmlTamplate = (task, index) => {
   <div class="todo-item ${task.completed ? 'checked' : ''}">
   <div class="description">${task.description}</div>
   <div class="buttons">
-    <input onclick="completeTask(${index})" class="btn-complete" type="checkbox" ${task.completed ? 'checked' : ''}>
-    <button class="btn-delete">Удалить</button>
+    <input 
+      onclick="completeTask(${index})" 
+      class="btn-complete" 
+      type="checkbox" ${task.completed ? 'checked' : ''}
+    >
+    <button onclick="deleteTask(${index})" class="btn-delete">Удалить</button>
   </div>
 </div>
   `
+}
+
+// перенос готовых вниз списка
+const filterTasks = () => {
+  const activeTask = tasks.length && tasks.filter((item) => item.completed === false)
+  const completedTask = tasks.length && tasks.filter((item) => item.completed === true)
+  tasks = [...activeTask, ...completedTask]
 }
 
 // наполняю список задач
 const htmlRenderList = () => {
   taskRender.innerHTML = '';
   if (tasks.length > 0) {
+    filterTasks();
     tasks.forEach((item, index) => {
       taskRender.innerHTML += createHtmlTamplate(item, index);
     });
@@ -39,7 +51,6 @@ const htmlRenderList = () => {
   }
 }
 htmlRenderList()
-console.log(todoItemEl)
 
 // строка в локальное хранение
 const updateLocalStorage = () => {
@@ -52,7 +63,7 @@ const completeTask = (index) => {
   if (tasks[index].completed) {
     todoItemEl[index].classList.add('checked');
   } else {
-    todoItemEl[index].classList.remove('checked');    
+    todoItemEl[index].classList.remove('checked');
   }
   updateLocalStorage();
   htmlRenderList();
@@ -68,8 +79,10 @@ btnAddTask.addEventListener('click', () => {
 });
 
 // удаление задачи
-const btnDeleteTask = (index) => {
-
+const deleteTask = (index) => {
+  tasks.splice(index, 1)
+  updateLocalStorage();
+  htmlRenderList();
 }
 
 

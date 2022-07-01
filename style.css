@@ -79,7 +79,8 @@ body {
 }
 
 .description {
-min-width: 100px;
+  min-width: 100px;
+  word-wrap: break-word;
 }
 
 .buttons {
